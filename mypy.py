@@ -17,9 +17,7 @@ display.grid(row=0, column=0, columnspan=5, padx=20, pady=20)
 num1 = 0
 num2 = 0
 
-op_sum = "+"
-op_prod = "*"
-op_div = "/"
+op_math = ""
 
 # endregion
 
@@ -37,23 +35,24 @@ def end_display0():
     texto_atual = display.get()
     display.delete(0, 'end')   
 
-def apli_Op():
-    texto_atual = display.get()
+def apli_Op(op_chose):
+    global num1, op_math
+    num1 = float(display.get())
+    op_math = op_chose
     display.delete(0, 'end')
-    global num1, num2, op_div, op_prod, op_sum
-    num1 = texto_atual
 
-def insert_algo():
-    texto = display.get()
-    display.delete(0, 'end')
-    display.insert(0, str(texto + "algo"))
-   
 
 
 def Eq_operation():
-    global num1, num2
-    num1 = float(display.get())
-    display.delete(0, 'end') 
+    global num1, num2, op_math
+    num2 = float(display.get())
+    display.delete(0, 'end')
+    if op_math == "soma":
+        display.insert(0, str(num1 + num2)) 
+    elif op_math == "prod":
+        display.insert(0, str(num1*num2))
+    elif op_math == "frac":
+        display.insert(0, str(float(0, num1/num2)))#
 
 
 
@@ -68,8 +67,14 @@ btn_del.grid(row=1, column=3, padx=2, pady=2)
 btn_dele = ctk.CTkButton(app, text="--", width=20, height=20, font=("Arial", 24), command=lambda: end_display0())
 btn_dele.grid(row=2, column=3, padx=2, pady=2)
 
-btnsum = ctk.CTkButton(app, text="+", width=35, height=35, font=("Arial", 24), command=lambda: insert_algo())
+btnsum = ctk.CTkButton(app, text="+", width=35, height=35, font=("Arial", 24), command=lambda: apli_Op("soma"))
 btnsum.grid(row=3, column=3, padx=2, pady=3)
+
+btnprod = ctk.CTkButton(app, text="x", width=35, height=35, font=("Arial", 24), command=lambda: apli_Op("prod"))
+btnprod.grid(row=6, column=3, padx=2, pady=3)
+
+btnfrac = ctk.CTkButton(app, text="/", width=35, height=35, font=("Arial", 24), command=lambda: apli_Op("frac"))
+btnfrac.grid(row=5, column=3, padx=2, pady=3)
 
 btnEq = ctk.CTkButton(app, text="=", width=35, height=35, font=("Arial", 24), command=lambda: Eq_operation())
 btnEq.grid(row=4, column=3, padx=2, pady=3)
