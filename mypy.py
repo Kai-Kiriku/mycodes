@@ -52,7 +52,7 @@ def Eq_operation():
     elif op_math == "prod":
         display.insert(0, str(num1*num2))
     elif op_math == "frac":
-        display.insert(0, str(float(0, num1/num2)))#
+        display.insert(0, str(float(num1/num2)))
 
 
 
@@ -108,6 +108,9 @@ btn2.grid(row=3, column=1, padx=2, pady=3)
 
 btn3 = ctk.CTkButton(app, text="3", width=65, height=65, font=("Arial", 24), command=lambda: button_number(3))
 btn3.grid(row=3, column=2, padx=2, pady=3)
+
+btn0 = ctk.CTkButton(app, text="0", width=65, height=65, font=("Arial", 24), command=lambda: button_number(0))
+btn0.grid(row=4, column=1, padx=2, pady=3)
 # endregion
 
 app.mainloop()
